@@ -64,15 +64,15 @@ public class Product
         this.seller = seller;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Product{" +
-//                "id='" + id + '\'' +
-//                ", productName='" + productName + '\'' +
-//                ", productBrand='" + productBrand + '\'' +
-//                ", productQuantity=" + productQuantity +
-//                ", seller=" + seller +
-//                ", productReviewList=" + productReviewList +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", productName='" + productName + '\'' +
+                ", productBrand='" + productBrand + '\'' +
+                ", productQuantity=" + productQuantity +
+                ", seller=" + seller +
+                ", productReviewList=" + productReviewList +
+                '}';
+    }
 }

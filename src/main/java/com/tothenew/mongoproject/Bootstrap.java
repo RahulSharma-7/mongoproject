@@ -1,9 +1,12 @@
 package com.tothenew.mongoproject;
 
 import com.tothenew.mongoproject.entities.Product;
+import com.tothenew.mongoproject.entities.ProductRedis;
 import com.tothenew.mongoproject.entities.Seller;
+import com.tothenew.mongoproject.repositories.ProductRedisRepository;
 import com.tothenew.mongoproject.repositories.ProductRepository;
 import com.tothenew.mongoproject.repositories.SellerRepository;
+import com.tothenew.mongoproject.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,9 +19,13 @@ import java.util.List;
 public class Bootstrap implements ApplicationRunner {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
     @Autowired
     private SellerRepository sellerRepository;
+    @Autowired
+    private ProductRedisRepository productRedisRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
 
     @Override
@@ -53,11 +60,19 @@ public class Bootstrap implements ApplicationRunner {
 
 
         sellerRepository.insert(seller);
-        productRepository.insert(product);
-        productRepository.insert(product1);
 
-        System.out.println(sellerRepository.findAll());
-        System.out.println("HHello");
+        productService.save(product);
+        productService.save(product1);
+
+
+
+        Thread.sleep(10000);
+ //       wait(10000);
+        System.out.println("<--------------------The Product is listed from the Redis db------------------->");
+        System.out.println(productRedisRepository.findAll());
+        System.out.println("<-----------------The product is listed from the Mongo db---------------------->");
+        System.out.println(productRepository.findAll());
+
 
         }
 }
